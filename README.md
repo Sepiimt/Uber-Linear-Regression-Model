@@ -29,8 +29,7 @@ Link to mentioned "Kaggle" dataset: `https://www.kaggle.com/datasets/yasserh/ube
 | 17610152     | 2014-08-28 17:47:00.000000188 | 16.0          | 2014-08-28 17:47:00 UTC | -73.925023         | 40.744085         | -73.973082          | 40.761247          | 5                 |
 
 ---
-#
-# **🧹 Data Cleaning**
+## **🧹 Data Cleaning**
 
 The initial dataset required preparation before analysis. This included handling missing values, correcting inconsistent entries, removing invalid or extreme outliers, and standardizing formats. These steps ensured the data was accurate, internally consistent, and suitable for model training.
 
@@ -99,16 +98,16 @@ $$\text{IQR} = Q_3 - Q_1$$
 * **Third Quartile ($Q_3$):** The value below which the lowest **75%** of the data lies (the 75th percentile). It is the median of the upper half of the data.
 * **IQR:** Represents the range or spread of the central **50%** of the data.
 
-##
+#
 #### Using IQR for Outlier Detection (Data Sanitizing)
 The most common application of the IQR in data sanitizing is to define a "fence" or range to identify potential **outliers** using the **$1.5 \times \text{IQR}$ Rule**. Any data point falling outside this range is flagged as an outlier and may be removed or investigated.
 
-##### **1. Calculate the Fence**
+#### 1. Calculate the Fence
 The outlier boundaries (or "fences") are calculated using the following formulas:
 * **Lower Bound:** $Q_1 - 1.5 \times \text{IQR}$
 * **Upper Bound:** $Q_3 + 1.5 \times \text{IQR}$
 
-##### **2. Identify and Sanitize Outliers**
+#### 2. Identify and Sanitize Outliers
 * A data point is considered a **low outlier** if its value is **less than** the **Lower Bound**.
 * A data point is considered a **high outlier** if its value is **greater than** the **Upper Bound**.
 
