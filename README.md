@@ -33,7 +33,7 @@ Link to mentioned "Kaggle" dataset: `https://www.kaggle.com/datasets/yasserh/ube
 
 The initial dataset required preparation before analysis. This included handling missing values, correcting inconsistent entries, removing invalid or extreme outliers, and standardizing formats. These steps ensured the data was accurate, internally consistent, and suitable for model training.
 
-#### 🧼Stage One:
+### 🧼Stage One:
 
 #### Processing Steps:
 	
@@ -68,13 +68,13 @@ $$Distance = 2 \cdot R \cdot \ atan2\left(\sqrt{a}, \sqrt{1-a}\right)$$
 
 #
 
-#### 🛠️Stage Two:
+### 🛠️Stage Two:
 
 #### Sanitizing Steps:
 Our data is most likely hosting some problematic rows among our dataset. It may be consisted of missing values, outlier values, etc.
 We use "Sanitizing Methods" to ensure the clearage of our dataset.
 	
-### 1️⃣Method One: Logical Sanitization
+#### 1️⃣Method One: Logical Sanitization
 1. We remove the rows consisting of distance values below 0
 2. Making sure that at least 80m per dollar has been spent by removing inappropriate rows.
 3. Removing the rows to ensure not more than 500m per dollar has been registered.
@@ -86,10 +86,10 @@ We use "Sanitizing Methods" to ensure the clearage of our dataset.
 
 
 
-### 2️⃣Method Two: IQR (Interquartile Range)
+#### 2️⃣Method Two: IQR (Interquartile Range)
 The **Interquartile Range (IQR)** is a measure of **statistical dispersion** widely used in data sanitization (cleaning) and exploratory data analysis, particularly for **detecting and handling outliers**. It's considered a **robust measure** because it's based on the middle 50% of the data, making it less sensitive to extreme values (outliers) than the total range or standard deviation.
 
-#### Defining the IQR
+##### Defining the IQR
 The IQR is simply the difference between the **Third Quartile ($Q_3$)** and the **First Quartile ($Q_1$)** of a dataset:
 	
 $$\text{IQR} = Q_3 - Q_1$$
@@ -99,15 +99,15 @@ $$\text{IQR} = Q_3 - Q_1$$
 * **IQR:** Represents the range or spread of the central **50%** of the data.
 
 #
-#### Using IQR for Outlier Detection (Data Sanitizing)
+##### Using IQR for Outlier Detection (Data Sanitizing)
 The most common application of the IQR in data sanitizing is to define a "fence" or range to identify potential **outliers** using the **$1.5 \times \text{IQR}$ Rule**. Any data point falling outside this range is flagged as an outlier and may be removed or investigated.
 
-#### 1. Calculate the Fence
+##### 1. Calculate the Fence
 The outlier boundaries (or "fences") are calculated using the following formulas:
 * **Lower Bound:** $Q_1 - 1.5 \times \text{IQR}$
 * **Upper Bound:** $Q_3 + 1.5 \times \text{IQR}$
 
-#### 2. Identify and Sanitize Outliers
+##### 2. Identify and Sanitize Outliers
 * A data point is considered a **low outlier** if its value is **less than** the **Lower Bound**.
 * A data point is considered a **high outlier** if its value is **greater than** the **Upper Bound**.
 
