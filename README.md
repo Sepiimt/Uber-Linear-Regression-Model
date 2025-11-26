@@ -66,7 +66,7 @@ $$Distance = 2 \cdot R \cdot \ atan2\left(\sqrt{a}, \sqrt{1-a}\right)$$
 ![Cleaning Scatter](https://i.postimg.cc/dVVzhqjh/1-raw-scatter-plots-plotly.png)
 
 
-###
+#
 
 ### **🛠️Stage Two:**
 
@@ -98,7 +98,7 @@ $$\text{IQR} = Q_3 - Q_1$$
 * **Third Quartile ($Q_3$):** The value below which the lowest **75%** of the data lies (the 75th percentile). It is the median of the upper half of the data.
 * **IQR:** Represents the range or spread of the central **50%** of the data.
 
-####
+##
 #### Using IQR for Outlier Detection (Data Sanitizing)
 The most common application of the IQR in data sanitizing is to define a "fence" or range to identify potential **outliers** using the **$1.5 \times \text{IQR}$ Rule**. Any data point falling outside this range is flagged as an outlier and may be removed or investigated.
 
@@ -135,7 +135,7 @@ Calculate the Cosine Component ($\mathbf{H_{cos}}$): This captures the horizonta
 $$H_{cos} = \cos \left( \frac{2\pi H}{P} \right) = \cos \left( \frac{2\pi H}{24} \right)$$
 
 
-
+#
 ### Numerical Values:
 Numerical values were normalized where appropriate, and only the most informative variables were retained. 
 #### Min-Max Scaling (Normalization):
@@ -193,7 +193,7 @@ The trained model was evaluated using standard regression metrics. These scores 
 This value represents the average squared difference between the model’s predictions and the actual target values.
 A lower MSE indicates that the model’s predictions are very close to the true outcomes.
 Given the scale of your normalized data, an MSE around 2.17e-4 is very low, showing that the model captures the underlying pattern well and does not produce large errors.
-
+##
 ##### **R² Score: 0.8741**
 The R² score (coefficient of determination) measures how much of the variance in the target variable is explained by the model.
 An R² of 0.874 means the model explains 87% of the variability in the output.
@@ -201,6 +201,7 @@ An R² of 0.874 means the model explains 87% of the variability in the output.
 In practical terms:
 Our linear model is doing a strong job, and most of the target’s behavior is successfully captured by the features `['passenger_count', 'distance_m', 'h_sin', 'h_cos']`.
 
+##
 ##### **Coefficients**
 Our learned coefficients were:
 ```css
@@ -244,6 +245,7 @@ This model performs well. The distance feature retains a strong, stable coeffici
 The time-based sinusoidal features and passenger count contribute smaller but meaningful refinements.
 Overall, the model explains about 87% of the variance, which is very strong for a linear model on real-world transportation data.
 
+##
 
 2. IQR (Interquartile Range) Scaled Results (Second Model)
 	MSE: 0.0015598
@@ -260,9 +262,9 @@ Distance, previously the dominant predictor, now has a coefficient of about 0.28
 ![Result of Method Two Scatter](https://i.postimg.cc/L6HWWH7W/5-result-nor2-scatter-plots-plotly.png)
 
 
-#### **❓Why IQR Scaling Is Not Suitable for This Dataset**
+### **❓Why IQR Scaling Is Not Suitable for This Dataset**
 
-##### **IQR scaling is designed for extreme outlier resistance**
+#### **IQR scaling is designed for extreme outlier resistance**
 IQR works by subtracting the median and dividing by the interquartile range (Q3–Q1).
 This is useful when a feature has extreme, irregular outliers that we want the model to completely ignore.
 
@@ -273,7 +275,9 @@ But in our dataset:
 
 The result is a squashed, distorted representation of the data.
 
-##### **Distance (your most important feature) gets flattened**
+##
+
+#### **Distance (your most important feature) gets flattened**
 Distance has a wide, continuous distribution that carries the majority of the predictive signal.
 
 With IQR scaling:
@@ -284,7 +288,9 @@ With IQR scaling:
 This is why the distance coefficient falls from 0.665 → 0.288.
 Our model becomes less sensitive to actual differences in trip length, so accuracy takes the impact.
 
-##### **Time features are already bounded**
+##
+
+#### **Time features are already bounded**
 Despite not applying this method on time values; our `h_sin` and `h_cos` features already live in [–1, 1].
 
 Applying IQR scaling on top of a bounded, circular feature:
@@ -294,7 +300,9 @@ Applying IQR scaling on top of a bounded, circular feature:
 
 These features are already perfect as they are.
 
-##### **Min-max fits our dataset’s nature**
+##
+
+#### **Min-max fits our dataset’s nature**
 Min-max scaling preserves:
 - Feature shape
 - Relative differences
@@ -304,6 +312,8 @@ It makes all features comparable without erasing the underlying meaning.
 That’s exactly what benefits a linear model.
 
 Our first model proved the explanation: High R², low MSE, stable coefficient behavior.
+
+##
 
 #### **💡Conclusion**
 IQR scaling degraded model quality because it over-compressed features that contained crucial predictive structure, especially distance.
