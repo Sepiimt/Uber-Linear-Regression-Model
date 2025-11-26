@@ -52,8 +52,6 @@ $$a = \sin^2\left(\frac{\Delta\phi}{2}\right) + \cos(\phi_1) \cdot \cos(\phi_2) 
 $$Distance = 2 \cdot R \cdot \ atan2\left(\sqrt{a}, \sqrt{1-a}\right)$$
 
 
-
-
 #### 🗂️Portion of the cleaned data:
 
 | `fare_amount` | `passenger_count` | `distance_m` | `pickup_time` |
@@ -64,7 +62,7 @@ $$Distance = 2 \cdot R \cdot \ atan2\left(\sqrt{a}, \sqrt{1-a}\right)$$
 | 5.3           | 3                 | 1661         | 08            |
 | 16.0          | 5                 | 4457         | 17            |
 
-#### Visualization of _"Stage One"_ Cleaned Data:
+###### Visualization of _"Stage One"_ Cleaned Data:
 ![Cleaning Scatter](https://i.postimg.cc/dVVzhqjh/1-raw-scatter-plots-plotly.png)
 
 
@@ -82,7 +80,7 @@ We use "Sanitizing Methods" to ensure the clearage of our dataset.
 3. Removing the rows to ensure not more than 500m per dollar has been registered.
 4. Making sure passenger numbers are between 0 and 10 by removing the outliers.
 
-#### Visualization of Sanitized Data with _Method One_:
+###### Visualization of Sanitized Data with _Method One_:
 ![Method One Sanitizing Scatter](https://i.postimg.cc/xdW7pLDW/2-sanetized-method-1-scatter-plots-plotly.png)
 
 
@@ -91,7 +89,7 @@ We use "Sanitizing Methods" to ensure the clearage of our dataset.
 #### **2️⃣Method Two: IQR (Interquartile Range)**
 The **Interquartile Range (IQR)** is a measure of **statistical dispersion** widely used in data sanitization (cleaning) and exploratory data analysis, particularly for **detecting and handling outliers**. It's considered a **robust measure** because it's based on the middle 50% of the data, making it less sensitive to extreme values (outliers) than the total range or standard deviation.
 
-##### Defining the IQR
+#### Defining the IQR
 The IQR is simply the difference between the **Third Quartile ($Q_3$)** and the **First Quartile ($Q_1$)** of a dataset:
 	
 $$\text{IQR} = Q_3 - Q_1$$
@@ -100,7 +98,7 @@ $$\text{IQR} = Q_3 - Q_1$$
 * **Third Quartile ($Q_3$):** The value below which the lowest **75%** of the data lies (the 75th percentile). It is the median of the upper half of the data.
 * **IQR:** Represents the range or spread of the central **50%** of the data.
 
-###### Using IQR for Outlier Detection (Data Sanitizing)
+##### Using IQR for Outlier Detection (Data Sanitizing)
 The most common application of the IQR in data sanitizing is to define a "fence" or range to identify potential **outliers** using the **$1.5 \times \text{IQR}$ Rule**. Any data point falling outside this range is flagged as an outlier and may be removed or investigated.
 
 ###### **1. Calculate the Fence**
@@ -113,9 +111,9 @@ The outlier boundaries (or "fences") are calculated using the following formulas
 * A data point is considered a **high outlier** if its value is **greater than** the **Upper Bound**.
 
 
-#### Visualization of the Sanitized data with _Method Two_:
+###### Visualization of the Sanitized data with _Method Two_:
 ![Method Two Sanitizing Scatter](https://i.postimg.cc/d1rfbDwg/3-sanetized-method-2-scatter-plots-plotly.png)
-##### **_As you can observe here and we will discuss the reasons later on, this sanitizing method does not perform well at all on this dataset!_**
+#### **_As you can observe here and we will discuss the reasons later on, this sanitizing method does not perform well at all on this dataset!_**
 1. Relevant and good data has been removed by this method.
 2. Estimate of 3K rows of data has been removed.
 3. Data's range has been considerably lowered.
@@ -224,7 +222,7 @@ Interpreting them:
 This is the baseline predicted value when all input features are zero.
 Since our inputs are normalized, this isn’t meant to be interpreted in isolation; it just centers the model correctly.
 
-##### 📈 Method One Model Result: (Logical Sanitization)
+###### 📈 Method One Model Result: (Logical Sanitization)
 ![Result of Method One Scatter](https://i.postimg.cc/jq69vW8N/4-result-nor1-scatter-plots-plotly.png)
 
 
@@ -257,7 +255,7 @@ After applying IQR scaling, the model’s performance decreases significantly.
 The R² drops from 0.874 to 0.694, meaning the model now explains only 69% of the variance instead of 87%.
 Distance, previously the dominant predictor, now has a coefficient of about 0.2878, indicating that the scaling distorted the relative magnitude and distribution of this feature.
 
-##### 📉 Method Two Model Result: (IQR)
+###### 📉 Method Two Model Result: (IQR)
 ![Result of Method Two Scatter](https://i.postimg.cc/L6HWWH7W/5-result-nor2-scatter-plots-plotly.png)
 
 
