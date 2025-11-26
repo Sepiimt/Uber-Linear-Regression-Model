@@ -66,7 +66,7 @@ $$Distance = 2 \cdot R \cdot \ atan2\left(\sqrt{a}, \sqrt{1-a}\right)$$
 ![Cleaning Scatter](https://i.postimg.cc/dVVzhqjh/1-raw-scatter-plots-plotly.png)
 
 
-
+###
 
 ### **🛠️Stage Two:**
 
@@ -98,15 +98,16 @@ $$\text{IQR} = Q_3 - Q_1$$
 * **Third Quartile ($Q_3$):** The value below which the lowest **75%** of the data lies (the 75th percentile). It is the median of the upper half of the data.
 * **IQR:** Represents the range or spread of the central **50%** of the data.
 
-##### Using IQR for Outlier Detection (Data Sanitizing)
+####
+#### Using IQR for Outlier Detection (Data Sanitizing)
 The most common application of the IQR in data sanitizing is to define a "fence" or range to identify potential **outliers** using the **$1.5 \times \text{IQR}$ Rule**. Any data point falling outside this range is flagged as an outlier and may be removed or investigated.
 
-###### **1. Calculate the Fence**
+##### **1. Calculate the Fence**
 The outlier boundaries (or "fences") are calculated using the following formulas:
 * **Lower Bound:** $Q_1 - 1.5 \times \text{IQR}$
 * **Upper Bound:** $Q_3 + 1.5 \times \text{IQR}$
 
-###### **2. Identify and Sanitize Outliers**
+##### **2. Identify and Sanitize Outliers**
 * A data point is considered a **low outlier** if its value is **less than** the **Lower Bound**.
 * A data point is considered a **high outlier** if its value is **greater than** the **Upper Bound**.
 
@@ -123,7 +124,7 @@ The outlier boundaries (or "fences") are calculated using the following formulas
 ### Time-based Values:
 Time-based columns were transformed into cyclic components:
 
-##### Sine and Cosine Transformation:
+#### Sine and Cosine Transformation:
 This method transforms the single time feature into two new features that capture the cyclical nature of the data. It uses trigonometric functions to map the time onto a circle, where the start and end points meet.
 
 Assuming our time is currently in hours, $H$, where $0 \le H < 24$, and considering the period ($P$) for time-of-day to be 24 hours, we calculate the Sine Component ($\mathbf{H_{sin}}$): 
@@ -137,7 +138,7 @@ $$H_{cos} = \cos \left( \frac{2\pi H}{P} \right) = \cos \left( \frac{2\pi H}{24}
 
 ### Numerical Values:
 Numerical values were normalized where appropriate, and only the most informative variables were retained. 
-##### Min-Max Scaling (Normalization):
+#### Min-Max Scaling (Normalization):
 This is the standard method for strictly transforming data to the closed interval $[0, 1]$.
 **Use case:** When the model requires input values to be strictly non-negative and within a fixed range (e.g., neural networks often prefer inputs between 0 and 1).
 **Sensitivity:** High sensitivity to outliers, which can compress the bulk of the data into a small portion of the $[0, 1]$ range.
