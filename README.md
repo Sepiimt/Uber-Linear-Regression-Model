@@ -5,13 +5,11 @@
 
 ---
 ## **🎯 Problem Definition**
-
 **This project focuses on building a predictive model to estimate the target variable based on key trip-related features.** 
 The goal is to create a reliable, interpretable model that can generalize well to unseen data. The workflow covers the entire pipeline from raw data to a trained model ready for use.
 
 ---
 ## **📥 Data Collection**
-
 The dataset used in this project originates from "Kaggle" (A well known website for public datasets). It includes information such as passenger counts, trip cost, distances, and timestamps.
 The raw data was imported in its original form to ensure reproducibility and transparency.
 
@@ -30,7 +28,6 @@ Link to mentioned "Kaggle" dataset: `https://www.kaggle.com/datasets/yasserh/ube
 
 ---
 ## **🧹 Data Cleaning**
-
 The initial dataset required preparation before analysis. This included handling missing values, correcting inconsistent entries, removing invalid or extreme outliers, and standardizing formats. These steps ensured the data was accurate, internally consistent, and suitable for model training.
 
 ### 🧼Stage One:
@@ -63,7 +60,7 @@ $$Distance = 2 \cdot R \cdot \ atan2\left(\sqrt{a}, \sqrt{1-a}\right)$$
 | 16.0          | 5                 | 4457         | 17            |
 
 ###### Visualization of _"Stage One"_ Cleaned Data:
-![Cleaning Scatter](https://i.postimg.cc/dVVzhqjh/1-raw-scatter-plots-plotly.png)
+![Cleaning Scatter](https://i.postimg.cc/wj3rdfjr/1-raw-scatter-plots-pyplot.png)
 
 
 #
@@ -81,7 +78,7 @@ We use "Sanitizing Methods" to ensure the clearage of our dataset.
 4. Making sure passenger numbers are between 0 and 10 by removing the outliers.
 
 ###### Visualization of Sanitized Data with _Method One_:
-![Method One Sanitizing Scatter](https://i.postimg.cc/xdW7pLDW/2-sanetized-method-1-scatter-plots-plotly.png)
+![Method One Sanitizing Scatter](https://i.postimg.cc/FH16QWHw/2-sanetized-method-1-scatter-plots-pyplot.png)
 
 
 
@@ -113,14 +110,13 @@ The outlier boundaries (or "fences") are calculated using the following formulas
 
 
 ###### Visualization of the Sanitized data with _Method Two_:
-![Method Two Sanitizing Scatter](https://i.postimg.cc/d1rfbDwg/3-sanetized-method-2-scatter-plots-plotly.png)
+![Method Two Sanitizing Scatter](https://i.postimg.cc/dVXxQ2hW/3-sanetized-method-2-scatter-plots-pyplot.png)
 #### **_As you can observe here and we will discuss the reasons later on, this sanitizing method does not perform well at all on this dataset!_**
 1. Relevant and good data has been removed by this method.
 2. Estimate of 3K rows of data has been removed.
 3. Data's range has been considerably lowered.
 ---
 ## **⚙️ Feature Engineering**
-
 ### Time-based Values:
 Time-based columns were transformed into cyclic components:
 
@@ -169,7 +165,6 @@ Range: The resulting range is theoretically $(-\infty, \infty)$, but the vast ma
 
 ---
 ## **📊 Model Selection and Training**
-
 ![Linear Regression](https://i.postimg.cc/MHzBzrJc/Gemini-Generated-Image-8w80wh8w80wh8w80.png)
 
 A linear model was selected for this project due to its suitability for the structure of the available data and the objectives of the analysis. The primary features used for prediction, including `distance`, `passenger count`, and the cyclic time components derived from the timestamp (`h_sin` and `h_cos`), are all variables that are expected to influence the target in a smooth and approximately linear manner. This makes linear regression an appropriate first choice for modeling their relationships.
@@ -225,7 +220,7 @@ This is the baseline predicted value when all input features are zero.
 Since our inputs are normalized, this isn’t meant to be interpreted in isolation; it just centers the model correctly.
 
 ###### 📈 Method One Model Result: (Logical Sanitization)
-![Result of Method One Scatter](https://i.postimg.cc/jq69vW8N/4-result-nor1-scatter-plots-plotly.png)
+![Result of Method One Scatter](https://i.postimg.cc/DzXYSSs7/4-result-nor1-scatter-plots-pyplot.png)
 
 
 #
@@ -258,7 +253,7 @@ The R² drops from 0.874 to 0.694, meaning the model now explains only 69% of th
 Distance, previously the dominant predictor, now has a coefficient of about 0.2878, indicating that the scaling distorted the relative magnitude and distribution of this feature.
 
 ###### 📉 Method Two Model Result: (IQR)
-![Result of Method Two Scatter](https://i.postimg.cc/L6HWWH7W/5-result-nor2-scatter-plots-plotly.png)
+![Result of Method Two Scatter](https://i.postimg.cc/25ZX11vy/5-result-nor2-scatter-plots-pyplot.png)
 
 
 ### **❓Why IQR Scaling Is Not Suitable for This Dataset**
@@ -320,7 +315,6 @@ Min-max scaling preserved the natural relationships in the data, producing a far
 
 ---
 ## **📦 Model Saving and Reusability**
-
 The final trained models was serialized and saved using a standard format (Pickle). This allows the model to be loaded and used for inference without requiring the full training code.
 - The model trained with "**Method One**" normalization: `models\Uber_Linear_Model_Ver2.pkl`
 - The model trained with "**Method One**" & "**Method Two**" normalization: `models\Uber_Linear_Model_Ver1.pkl`
