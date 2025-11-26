@@ -42,7 +42,7 @@ The initial dataset required preparation before analysis. This included handling
 - **Transforming longitudes to actual distances:** 
 		**Distance Calculation Method:**
 		To calculate the distance between `pickup` and `dropoff` coordinates, we use the **Haversine Formula**. This accounts for the curvature of the Earth.
-		Where: $\phi$ is latitude, $\lambda$ is longitude (converted to radians), $R$ is the Earth's mean radius ($6,371 \text{ km}$).
+		Where: $\phi$ is latitude, $\lambda$ is longitude (converted to radians) and $R$ is the Earth's mean radius ($6,371 \text{ km}$).
 	
 - **Cleaning Pickup time:** The importance of pickup time in our data is for the hour of travel; thus we delete the irrelevant information from the column.
 
@@ -129,10 +129,10 @@ Time-based columns were transformed into cyclic components:
 This method transforms the single time feature into two new features that capture the cyclical nature of the data. It uses trigonometric functions to map the time onto a circle, where the start and end points meet.
 
 Assuming our time is currently in hours, $H$, where $0 \le H < 24$, and considering the period ($P$) for time-of-day to be 24 hours, we calculate the Sine Component ($\mathbf{H_{sin}}$): 
-This captures the vertical (or North-South) component on the circle.
+This captures the vertical (or North-South) component on the circle:
 $$H_{sin} = \sin \left( \frac{2\pi H}{P} \right) = \sin \left( \frac{2\pi H}{24} \right)$$
 
-Calculate the Cosine Component ($\mathbf{H_{cos}}$): This captures the horizontal (or East-West) component on the circle.
+Calculate the Cosine Component ($\mathbf{H_{cos}}$): This captures the horizontal (or East-West) component on the circle:
 $$H_{cos} = \cos \left( \frac{2\pi H}{P} \right) = \cos \left( \frac{2\pi H}{24} \right)$$
 
 
