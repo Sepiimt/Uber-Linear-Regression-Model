@@ -42,11 +42,9 @@ The initial dataset required preparation before analysis. This included handling
 - **Transforming longitudes to actual distances:** 
 		**Distance Calculation Method:**
 		To calculate the distance between `pickup` and `dropoff` coordinates, we use the **Haversine Formula**. This accounts for the curvature of the Earth.
-		Where:
-			* $\phi$ is latitude, $\lambda$ is longitude (converted to radians).
-			* $R$ is the Earth's mean radius ($6,371 \text{ km}$).
-		$$a = \sin^2\left(\frac{\Delta\phi}{2}\right) + \cos(\phi_1) \cdot \cos(\phi_2) \cdot \sin^2\left(\frac{\Delta\lambda}{2}\right)$$
-		$$Distance = 2 \cdot R \cdot \operatorname{atan2}\left(\sqrt{a}, \sqrt{1-a}\right)$$
+		Where: $\phi$ is latitude, $\lambda$ is longitude (converted to radians), $R$ is the Earth's mean radius ($6,371 \text{ km}$) and d is Distance.
+$$a = \sin^2\left(\frac{\Delta\phi}{2}\right) + \cos(\phi_1) \cdot \cos(\phi_2) \cdot \sin^2\left(\frac{\Delta\lambda}{2}\right)$$
+$$d = 2 \cdot R \cdot \operatorname{atan2}\left(\sqrt{a}, \sqrt{1-a}\right)$$
 
 - **Cleaning Pickup time:** The importance of pickup time in our data is for the hour of travel; thus we delete the irrelevant information from the column.
 
