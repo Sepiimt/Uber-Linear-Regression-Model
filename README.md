@@ -33,7 +33,7 @@ Link to mentioned "Kaggle" dataset: `https://www.kaggle.com/datasets/yasserh/ube
 
 The initial dataset required preparation before analysis. This included handling missing values, correcting inconsistent entries, removing invalid or extreme outliers, and standardizing formats. These steps ensured the data was accurate, internally consistent, and suitable for model training.
 
-### **🧼Stage One:**
+#### 🧼Stage One:
 
 #### Processing Steps:
 	
@@ -68,13 +68,13 @@ $$Distance = 2 \cdot R \cdot \ atan2\left(\sqrt{a}, \sqrt{1-a}\right)$$
 
 #
 
-### **🛠️Stage Two:**
+#### 🛠️Stage Two:
 
 #### Sanitizing Steps:
 Our data is most likely hosting some problematic rows among our dataset. It may be consisted of missing values, outlier values, etc.
 We use "Sanitizing Methods" to ensure the clearage of our dataset.
 	
-#### **1️⃣Method One: Logical Sanitization**
+### 1️⃣Method One: Logical Sanitization
 1. We remove the rows consisting of distance values below 0
 2. Making sure that at least 80m per dollar has been spent by removing inappropriate rows.
 3. Removing the rows to ensure not more than 500m per dollar has been registered.
@@ -86,7 +86,7 @@ We use "Sanitizing Methods" to ensure the clearage of our dataset.
 
 
 
-#### **2️⃣Method Two: IQR (Interquartile Range)**
+### 2️⃣Method Two: IQR (Interquartile Range)
 The **Interquartile Range (IQR)** is a measure of **statistical dispersion** widely used in data sanitization (cleaning) and exploratory data analysis, particularly for **detecting and handling outliers**. It's considered a **robust measure** because it's based on the middle 50% of the data, making it less sensitive to extreme values (outliers) than the total range or standard deviation.
 
 #### Defining the IQR
@@ -189,12 +189,12 @@ The trained model was evaluated using standard regression metrics. These scores 
 ![Method one result](https://i.postimg.cc/J0RXRdCj/Gemini-Generated-Image-12bg5u12bg5u12bg.png)
 #### 📄Model Performance Explanation:
 
-##### **Mean Squared Error (MSE): 0.000217**
+##### Mean Squared Error (MSE): 0.000217
 This value represents the average squared difference between the model’s predictions and the actual target values.
 A lower MSE indicates that the model’s predictions are very close to the true outcomes.
 Given the scale of your normalized data, an MSE around 2.17e-4 is very low, showing that the model captures the underlying pattern well and does not produce large errors.
 ##
-##### **R² Score: 0.8741**
+##### R² Score: 0.8741
 The R² score (coefficient of determination) measures how much of the variance in the target variable is explained by the model.
 An R² of 0.874 means the model explains 87% of the variability in the output.
 
@@ -202,7 +202,7 @@ In practical terms:
 Our linear model is doing a strong job, and most of the target’s behavior is successfully captured by the features `['passenger_count', 'distance_m', 'h_sin', 'h_cos']`.
 
 ##
-##### **Coefficients**
+##### Coefficients
 Our learned coefficients were:
 ```css
 [ 0.00091027   0.66516669  -0.00122833  -0.00331209 ]
@@ -264,7 +264,7 @@ Distance, previously the dominant predictor, now has a coefficient of about 0.28
 
 ### **❓Why IQR Scaling Is Not Suitable for This Dataset**
 
-#### **IQR scaling is designed for extreme outlier resistance**
+#### IQR scaling is designed for extreme outlier resistance
 IQR works by subtracting the median and dividing by the interquartile range (Q3–Q1).
 This is useful when a feature has extreme, irregular outliers that we want the model to completely ignore.
 
@@ -277,7 +277,7 @@ The result is a squashed, distorted representation of the data.
 
 ##
 
-#### **Distance (your most important feature) gets flattened**
+#### Distance (your most important feature) gets flattened
 Distance has a wide, continuous distribution that carries the majority of the predictive signal.
 
 With IQR scaling:
@@ -290,7 +290,7 @@ Our model becomes less sensitive to actual differences in trip length, so accura
 
 ##
 
-#### **Time features are already bounded**
+#### Time features are already bounded
 Despite not applying this method on time values; our `h_sin` and `h_cos` features already live in [–1, 1].
 
 Applying IQR scaling on top of a bounded, circular feature:
@@ -302,7 +302,7 @@ These features are already perfect as they are.
 
 ##
 
-#### **Min-max fits our dataset’s nature**
+#### Min-max fits our dataset’s nature
 Min-max scaling preserves:
 - Feature shape
 - Relative differences
@@ -315,7 +315,7 @@ Our first model proved the explanation: High R², low MSE, stable coefficient be
 
 ##
 
-#### **💡Conclusion**
+#### 💡Conclusion
 IQR scaling degraded model quality because it over-compressed features that contained crucial predictive structure, especially distance.
 Min-max scaling preserved the natural relationships in the data, producing a far more accurate and stable model.
 
