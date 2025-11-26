@@ -146,7 +146,7 @@ This is the standard method for strictly transforming data to the closed interva
 **Formula:** $$x_{scaled} = \frac{x - \text{min}(x)}{\text{max}(x) - \text{min}(x)}$$
 
 
-##### Standardization (Z-Score Scaling):
+#### Standardization (Z-Score Scaling):
 This method transforms the data to have a mean of 0 and a standard deviation of 1.
 **Use case:** When you suspect your data contains outliers or when the algorithm assumes a Gaussian (Normal) distribution (e.g., Linear Regression, k-Nearest Neighbors).
 Range: The resulting range is theoretically $(-\infty, \infty)$, but the vast majority of values fall between $\approx -3$ and $\approx 3$.
@@ -156,7 +156,7 @@ Range: The resulting range is theoretically $(-\infty, \infty)$, but the vast ma
 
 
 
-### 🗂️Portion of the engineered data:
+#### 🗂️Portion of the engineered data:
 
 | `fare_amount` | `passenger_count` | `distance_m` | `h_sin`   | `h_cos`       |
 | ------------- | ----------------- | ------------ | --------- | ------------- |
@@ -228,7 +228,7 @@ Since our inputs are normalized, this isn’t meant to be interpreted in isolati
 ![Result of Method One Scatter](https://i.postimg.cc/jq69vW8N/4-result-nor1-scatter-plots-plotly.png)
 
 
-
+#
 
 #### **❌Results Of Method Two: (IQR)**
 ![Method two result](https://i.postimg.cc/T1xVp3gW/Gemini-Generated-Image-kea8blkea8blkea8.png)
