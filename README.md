@@ -245,7 +245,6 @@ This model performs well. The distance feature retains a strong, stable coeffici
 The time-based sinusoidal features and passenger count contribute smaller but meaningful refinements.
 Overall, the model explains about 87% of the variance, which is very strong for a linear model on real-world transportation data.
 
-##
 
 2. IQR (Interquartile Range) Scaled Results (Second Model)
 	MSE: 0.0015598
