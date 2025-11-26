@@ -4,13 +4,15 @@
 ![Thumbnail](https://i.postimg.cc/nrnmnwfh/Gemini-Generated-Image-7mnqjr7mnqjr7mnq-(1).png)
 
 ---
-## **🎯 Problem Definition**
+#
+# **🎯 Problem Definition**
 
 **This project focuses on building a predictive model to estimate the target variable based on key trip-related features.** 
 The goal is to create a reliable, interpretable model that can generalize well to unseen data. The workflow covers the entire pipeline from raw data to a trained model ready for use.
 
 ---
-## **📥 Data Collection**
+#
+# **📥 Data Collection**
 
 The dataset used in this project originates from "Kaggle" (A well known website for public datasets). It includes information such as passenger counts, trip cost, distances, and timestamps.
 The raw data was imported in its original form to ensure reproducibility and transparency.
@@ -29,7 +31,8 @@ Link to mentioned "Kaggle" dataset: `https://www.kaggle.com/datasets/yasserh/ube
 | 17610152     | 2014-08-28 17:47:00.000000188 | 16.0          | 2014-08-28 17:47:00 UTC | -73.925023         | 40.744085         | -73.973082          | 40.761247          | 5                 |
 
 ---
-## **🧹 Data Cleaning**
+#
+# **🧹 Data Cleaning**
 
 The initial dataset required preparation before analysis. This included handling missing values, correcting inconsistent entries, removing invalid or extreme outliers, and standardizing formats. These steps ensured the data was accurate, internally consistent, and suitable for model training.
 
@@ -119,7 +122,8 @@ The outlier boundaries (or "fences") are calculated using the following formulas
 2. Estimate of 3K rows of data has been removed.
 3. Data's range has been considerably lowered.
 ---
-## **⚙️ Feature Engineering**
+#
+# **⚙️ Feature Engineering**
 
 ### Time-based Values:
 Time-based columns were transformed into cyclic components:
@@ -168,7 +172,8 @@ Range: The resulting range is theoretically $(-\infty, \infty)$, but the vast ma
 ###### These engineered features were used as the model inputs.
 
 ---
-## **📊 Model Selection and Training**
+#
+# **📊 Model Selection and Training**
 
 ![Linear Regression](https://i.postimg.cc/MHzBzrJc/Gemini-Generated-Image-8w80wh8w80wh8w80.png)
 
@@ -181,7 +186,8 @@ From a practical standpoint, linear regression is computationally efficient and 
 Overall, a linear model offers a strong balance of performance, simplicity, and interpretability, making it a fitting choice for this predictive task.
 
 ---
-## **🖼️ Evaluation & Visualization**
+#
+# **🖼️ Evaluation & Visualization**
 The trained model was evaluated using standard regression metrics. These scores reflect how well the model captures overall trends and how accurately it predicts unseen samples.
 
 
@@ -320,7 +326,8 @@ IQR scaling degraded model quality because it over-compressed features that cont
 Min-max scaling preserved the natural relationships in the data, producing a far more accurate and stable model.
 
 ---
-## **📦 Model Saving and Reusability**
+#
+# **📦 Model Saving and Reusability**
 
 The final trained models was serialized and saved using a standard format (Pickle). This allows the model to be loaded and used for inference without requiring the full training code.
 - The model trained with "**Method One**" normalization: `models\Uber_Linear_Model_Ver2.pkl`
