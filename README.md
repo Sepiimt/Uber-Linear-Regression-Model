@@ -191,20 +191,19 @@ The trained model was evaluated using standard regression metrics. These scores 
 ![Method one result](https://i.postimg.cc/J0RXRdCj/Gemini-Generated-Image-12bg5u12bg5u12bg.png)
 #### 📄Model Performance Explanation:
 
-**Mean Squared Error (MSE): 0.000217**
+###### **Mean Squared Error (MSE): 0.000217**
 This value represents the average squared difference between the model’s predictions and the actual target values.
 A lower MSE indicates that the model’s predictions are very close to the true outcomes.
 Given the scale of your normalized data, an MSE around 2.17e-4 is very low, showing that the model captures the underlying pattern well and does not produce large errors.
 
-**R² Score: 0.8741**
+###### **R² Score: 0.8741**
 The R² score (coefficient of determination) measures how much of the variance in the target variable is explained by the model.
 An R² of 0.874 means the model explains 87% of the variability in the output.
 
 In practical terms:
 Our linear model is doing a strong job, and most of the target’s behavior is successfully captured by the features `['passenger_count', 'distance_m', 'h_sin', 'h_cos']`.
 
-
-**Coefficients**
+###### **Coefficients**
 Our learned coefficients were:
 ```css
 [ 0.00091027   0.66516669  -0.00122833  -0.00331209 ]
@@ -265,7 +264,7 @@ Distance, previously the dominant predictor, now has a coefficient of about 0.28
 
 #### **❓Why IQR Scaling Is Not Suitable for This Dataset**
 
-###### **1. IQR scaling is designed for extreme outlier resistance**
+###### **IQR scaling is designed for extreme outlier resistance**
 IQR works by subtracting the median and dividing by the interquartile range (Q3–Q1).
 This is useful when a feature has extreme, irregular outliers that we want the model to completely ignore.
 
@@ -276,7 +275,7 @@ But in our dataset:
 
 The result is a squashed, distorted representation of the data.
 
-###### **2. Distance (your most important feature) gets flattened**
+###### **Distance (your most important feature) gets flattened**
 Distance has a wide, continuous distribution that carries the majority of the predictive signal.
 
 With IQR scaling:
@@ -287,7 +286,7 @@ With IQR scaling:
 This is why the distance coefficient falls from 0.665 → 0.288.
 Our model becomes less sensitive to actual differences in trip length, so accuracy takes the impact.
 
-###### **3. Time features are already bounded**
+###### **Time features are already bounded**
 Despite not applying this method on time values; our `h_sin` and `h_cos` features already live in [–1, 1].
 
 Applying IQR scaling on top of a bounded, circular feature:
@@ -297,7 +296,7 @@ Applying IQR scaling on top of a bounded, circular feature:
 
 These features are already perfect as they are.
 
-###### **4. Min-max fits our dataset’s nature**
+###### **Min-max fits our dataset’s nature**
 Min-max scaling preserves:
 - Feature shape
 - Relative differences
