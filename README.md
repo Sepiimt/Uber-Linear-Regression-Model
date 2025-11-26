@@ -115,7 +115,7 @@ The outlier boundaries (or "fences") are calculated using the following formulas
 
 #### Visualization of the Sanitized data with _Method Two_:
 ![Method Two Sanitizing Scatter](https://i.postimg.cc/d1rfbDwg/3-sanetized-method-2-scatter-plots-plotly.png)
-###### **_As you can observe here and we will discuss the reasons later on, this sanitizing method does not perform well at all on this dataset!_**
+##### **_As you can observe here and we will discuss the reasons later on, this sanitizing method does not perform well at all on this dataset!_**
 1. Relevant and good data has been removed by this method.
 2. Estimate of 3K rows of data has been removed.
 3. Data's range has been considerably lowered.
@@ -166,8 +166,7 @@ Range: The resulting range is theoretically $(-\infty, \infty)$, but the vast ma
 | 0.056046      | 0.166667          | 0.082729     | -0.707107 | 0.707107      |
 | 0.023001      | 0.500000          | 0.027264     | 0.866025  | -0.500000     |
 | 0.069525      | 0.833333          | 0.073510     | -0.965926 | -0.258819<br> |
-
-These engineered features were used as the model inputs.
+###### These engineered features were used as the model inputs.
 
 ---
 ## **📊 Model Selection and Training**
@@ -191,19 +190,19 @@ The trained model was evaluated using standard regression metrics. These scores 
 ![Method one result](https://i.postimg.cc/J0RXRdCj/Gemini-Generated-Image-12bg5u12bg5u12bg.png)
 #### 📄Model Performance Explanation:
 
-###### **Mean Squared Error (MSE): 0.000217**
+##### **Mean Squared Error (MSE): 0.000217**
 This value represents the average squared difference between the model’s predictions and the actual target values.
 A lower MSE indicates that the model’s predictions are very close to the true outcomes.
 Given the scale of your normalized data, an MSE around 2.17e-4 is very low, showing that the model captures the underlying pattern well and does not produce large errors.
 
-###### **R² Score: 0.8741**
+##### **R² Score: 0.8741**
 The R² score (coefficient of determination) measures how much of the variance in the target variable is explained by the model.
 An R² of 0.874 means the model explains 87% of the variability in the output.
 
 In practical terms:
 Our linear model is doing a strong job, and most of the target’s behavior is successfully captured by the features `['passenger_count', 'distance_m', 'h_sin', 'h_cos']`.
 
-###### **Coefficients**
+##### **Coefficients**
 Our learned coefficients were:
 ```css
 [ 0.00091027   0.66516669  -0.00122833  -0.00331209 ]
@@ -264,7 +263,7 @@ Distance, previously the dominant predictor, now has a coefficient of about 0.28
 
 #### **❓Why IQR Scaling Is Not Suitable for This Dataset**
 
-###### **IQR scaling is designed for extreme outlier resistance**
+##### **IQR scaling is designed for extreme outlier resistance**
 IQR works by subtracting the median and dividing by the interquartile range (Q3–Q1).
 This is useful when a feature has extreme, irregular outliers that we want the model to completely ignore.
 
@@ -275,7 +274,7 @@ But in our dataset:
 
 The result is a squashed, distorted representation of the data.
 
-###### **Distance (your most important feature) gets flattened**
+##### **Distance (your most important feature) gets flattened**
 Distance has a wide, continuous distribution that carries the majority of the predictive signal.
 
 With IQR scaling:
@@ -286,7 +285,7 @@ With IQR scaling:
 This is why the distance coefficient falls from 0.665 → 0.288.
 Our model becomes less sensitive to actual differences in trip length, so accuracy takes the impact.
 
-###### **Time features are already bounded**
+##### **Time features are already bounded**
 Despite not applying this method on time values; our `h_sin` and `h_cos` features already live in [–1, 1].
 
 Applying IQR scaling on top of a bounded, circular feature:
@@ -296,7 +295,7 @@ Applying IQR scaling on top of a bounded, circular feature:
 
 These features are already perfect as they are.
 
-###### **Min-max fits our dataset’s nature**
+##### **Min-max fits our dataset’s nature**
 Min-max scaling preserves:
 - Feature shape
 - Relative differences
